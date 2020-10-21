@@ -62,11 +62,42 @@
       background: black;
       position: absolute;
       top: 50%;
+      transform-origin: 100%;
+      transform: rotate(90deg);
     }
 
   </style>
 
+
+
+
   <script>
+
+    const secHand = document.querySelector(`.second-hand`);
+    const minHand = document.querySelector(`.min-hand`);
+    const hrHand = document.querySelector(`.hour-hand`);
+
+    function clock(){
+      let currdate = new Date();
+      let hr = currdate.getHours();
+      let min = currdate.getMinutes();
+      let sec = currdate.getSeconds();
+
+      console.log(sec);
+
+      let hrDegree = ((hr/12)*360) + 90;
+      let minDegree = ((min/60)*360) + 90;
+      let secDegree = (((sec/60)*360) + 90)%360;
+      
+      secHand.style.transform = `rotate(${secDegree}deg)`;
+      minHand.style.transform = `rotate(${minDegree}deg)`;
+      hrHand.style.transform = `rotate(${hrDegree}deg)`;
+    }
+    
+
+    setInterval(clock, 1000);
+    clock();
+
 
 
   </script>
