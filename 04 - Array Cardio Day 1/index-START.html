@@ -31,17 +31,38 @@
 
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
+    function check_1500s(obj){
+      if(obj.year >= 1500 && obj.year < 1600)
+        return obj;
+    }
+    born_in_1500s = inventors.filter(check_1500s);
+    console.table(born_in_1500s)
 
     // Array.prototype.map()
     // 2. Give us an array of the inventors first and last names
+    first_last_name = inventors.map(obj => obj.first + " " + obj.last);
+    console.log(first_last_name);
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
+    function years_comparator(first, second){
+      return (second.passed - second.year) - (first.passed - first.year);
+    }
+    sorted_list = inventors.sort((a, b) => a.year > b.year ? 1 : -1)
+    console.table(sorted_list);
 
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live all together?
+    function reduce_function(total=0, obj){
+      return total += (obj.passed - obj.year);
+    }
+
+    total_age_combined = inventors.reduce(reduce_function, 0)
+    console.log(total_age_combined);
 
     // 5. Sort the inventors by years lived
+    years_lived = inventors.sort(years_comparator)
+    console.table(sorted_list)
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
@@ -49,10 +70,23 @@
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
+    function people_comparator(a, b){
+      let aLast = a.split(', ')[1];
+      let bLast = b.split(', ')[1];
+
+      return aLast > bLast ? 1: -1;
+
+    }
+    sorted_people = people.sort(people_comparator);
+    console.log(sorted_people);
 
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
+    occurance = {}
+    data.map((obj) => occurance[obj] = (occurance[obj] || 0) + 1);
+    console.log(occurance);
+    // console.log(data);
 
   </script>
 </body>
